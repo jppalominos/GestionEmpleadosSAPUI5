@@ -1,0 +1,31 @@
+<mvc:View controllerName="logaligroup.empleados.controller.Menu"
+          xmlns:mvc="sap.ui.core.mvc"
+          displayBlock="true"
+          xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+		<content>
+            <Panel headerText="{i18n>empleados}" 
+                   expandable="true" 
+                   expanded="true">
+                <GenericTile headerImage="sap-icon://add-employee" 
+                             class="sapUiTinyMarginEnd" 
+                             press="fCrearEmpleado">
+                    <TileContent footer="{i18n>crearEmpleado}"/>
+                </GenericTile>
+                <GenericTile headerImage="sap-icon://employee-lookup"
+                             press="fVerEmpleado">
+                    <TileContent footer="{i18n>verEmpleado}"/>
+                </GenericTile>
+            </Panel>
+            <Panel headerText="{i18n>pedidos}" 
+                   expandable="true" 
+                   expanded="true">
+                <GenericTile id="linkFirmarPedido"
+                             headerImage="sap-icon://signature" 
+                             url="https://7a7125eetrial-dev-logali-approuter.cfapps.us10.hana.ondemand.com/logaligroupEmployees/index.html">
+                    <TileContent footer="{i18n>firmarPedido}"/>
+                </GenericTile>
+            </Panel>
+        </content>
+	</Page>
+</mvc:View>

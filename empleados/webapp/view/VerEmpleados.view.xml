@@ -1,0 +1,122 @@
+<mvc:View controllerName="logaligroup.empleados.controller.VerEmpleado" 
+          displayBlock="true" 
+          xmlns="sap.m"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns:s="sap.suite.ui.commons">
+    <SplitApp id="splitAppEmpleado">
+        <masterPages>
+			<Page id="masterEmpleados"
+                  showHeader="false">
+                <Toolbar class="sapUiTinyMarginTop">
+					<Button icon="sap-icon://nav-back" 
+                            press="volver"/>
+					<SearchField liveChange="buscarEmpleado" 
+                                 width="100%"/>
+				</Toolbar>
+                <List itemPress="seleccionEmpleado" 
+                      items="{ path:'employeesModel>/Users',
+                               filters:[{
+                                   path:'SapId',
+                                   operator:'EQ',
+                                   value1:'juan.palominos@gmail.com'
+                                }]}">
+					<items>
+						<StandardListItem title="{employeesModel>FirstName} {employeesModel>LastName}" 
+                                          description="{employeesModel>Dni}" 
+                                          type="Active"/>
+					</items>
+				</List>
+            </Page>
+        </masterPages>
+        <detailPages>
+            <Page id="detailSeleccionEmpleados"
+                  showHeader="false">
+                <FlexBox height="100%"
+                         alignItems="Center" 
+                         justifyContent="Center">
+					<Text text="{i18n>seleccioneEmpleado}"/>
+				</FlexBox>
+            </Page>
+            <Page id="detailEmpleado"
+                  title="{i18n>detalleEmpleado}">
+                <ObjectHeader title="{employeesModel>FirstName} {employeesModel>LastName}"
+                              icon= "{= ${employeesModel>Type}==='0' ? 'sap-icon://employee-pane' : ${employeesModel>Type}==='1' ? 'sap-icon://employee' : 'sap-icon://leads' }"
+					          intro="{employeesModel>Dni}"
+					          responsive="true"
+                              class="sapUiResponsivePadding--header">
+					<ObjectAttribute title="{i18n>fechaIncorporacion}" 
+                                     text="{ path:'employeesModel>CreationDate', 
+                                             type:'sap.ui.model.type.Date'}" />
+					<ObjectAttribute title="{i18n>tipo}" 
+                                     text="{= ${employeesModel>Type} === '0' ? ${i18n>interno} : ${employeesModel>Type} === '1' ? ${i18n>autonomo} : ${i18n>gerente}}" />
+					<ObjectAttribute title="{i18n>comentario}" 
+                                     text="{employeesModel>Comments}" />
+				</ObjectHeader>
+                <IconTabBar class="sapUiResponsiveContentPadding">
+                    <items>
+                        <!-- Pestaña Ficheros -->
+                        <IconTabFilter text="{i18n>ficheros}"
+                                       icon="sap-icon://attachment"
+                                       design="Horizontal">
+							<UploadCollection id="uploadCollection"
+                                              maximumFilenameLength="55"
+                                              maximumFileSize="10"
+                                              multiple="true"
+                                              sameFilenameAllowed="true"
+                                              instantUpload="true"
+                                              uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments"
+                                              items="{employeesModel>UserToAttachment}"
+                                              change="onChangeFiles"
+                                              uploadComplete="onUploadComplete"
+                                              beforeUploadStarts="onBeforeUploadStart"
+                                              fileDeleted="onFileDeleted"
+                                              noDataDescription="{i18n>Arrastrarficheros}">
+                                <items>
+                                    <UploadCollectionItem documentId="{employeesModel>AttId}"
+                                                          fileName="{employeesModel>DocName}"
+                                                          visibleEdit="false"
+                                                          press="descargarFichero">
+                                    </UploadCollectionItem>
+                                </items>
+							</UploadCollection>
+                        </IconTabFilter>
+                        <!-- Pestaña Historial -->
+                        <IconTabFilter text="{i18n>historial}"
+							           icon="sap-icon://money-bills"
+							           design="Horizontal">
+							<s:Timeline height="100%"
+                                        enableScroll="false"
+								        enableDoubleSided="true"
+                                        showHeaderBar="false"
+                                        groupByType="Year"
+								        groupBy="CreationDate"
+								        sortOldestFirst="true"
+								        content="{employeesModel>UserToSalary}">
+								<s:content>
+									<s:TimelineItem text="{employeesModel>Comments}"
+                                                    icon="sap-icon://circle-task"
+                                                    dateTime="{employeesModel>CreationDate}"
+										            userName="{ parts:[{
+                                                                    path:'employeesModel>Ammount'},
+                                                                    {path:'employeesModel>Waers'}
+                                                                ],
+												                type: 'sap.ui.model.type.Currency',
+												                formatOptions: {showMeasure: false}
+                                                              }">
+									</s:TimelineItem>
+								</s:content>
+							</s:Timeline>
+						</IconTabFilter>
+                    </items>
+                </IconTabBar>
+                <footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="{i18n>darDeBaja}" press="darDeBaja"></Button>
+						<Button text="{i18n>ascender}" press="ascender"></Button>
+					</Toolbar>
+				</footer>
+            </Page>
+        </detailPages>
+    </SplitApp>
+</mvc:View>
