@@ -1,3 +1,4 @@
+// @ts-nocheck
 sap.ui.define([
     "sap/ui/core/mvc/Controller"
 ],
@@ -12,8 +13,9 @@ sap.ui.define([
             onInit: function () {
 
             },
-
+            
             onAfterRendering: function(){
+                //Solución error navegación, según pdf con enunciado de actividad
 			    var genericTileFirmarPedido = this.byId("linkFirmarPedido");
 		        var idGenericTileFirmarPedido = genericTileFirmarPedido.getId();
 		        jQuery("#"+idGenericTileFirmarPedido)[0].id = "";

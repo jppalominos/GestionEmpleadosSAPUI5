@@ -3,7 +3,9 @@
           xmlns="sap.m"
           xmlns:mvc="sap.ui.core.mvc"
           xmlns:s="sap.suite.ui.commons">
-    <SplitApp id="splitAppEmpleado">
+    <SplitApp id="splitAppEmpleado"
+              initialDetail="detailSeleccionEmpleados"
+		      initialMaster="masterEmpleados">
         <masterPages>
 			<Page id="masterEmpleados"
                   showHeader="false">
@@ -29,7 +31,7 @@
             </Page>
         </masterPages>
         <detailPages>
-            <Page id="detailSeleccionEmpleados"
+            <Page id="detalleSeleccionEmpleados"
                   showHeader="false">
                 <FlexBox height="100%"
                          alignItems="Center" 
@@ -37,7 +39,7 @@
 					<Text text="{i18n>seleccioneEmpleado}"/>
 				</FlexBox>
             </Page>
-            <Page id="detailEmpleado"
+            <Page id="detalleEmpleado"
                   title="{i18n>detalleEmpleado}">
                 <ObjectHeader title="{employeesModel>FirstName} {employeesModel>LastName}"
                               icon= "{= ${employeesModel>Type}==='0' ? 'sap-icon://employee-pane' : ${employeesModel>Type}==='1' ? 'sap-icon://employee' : 'sap-icon://leads' }"
