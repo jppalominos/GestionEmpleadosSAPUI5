@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+                         xmlns="sap.m"
+                         xmlns:f="sap.ui.layout.form"
+                         xmlns:mvc="sap.ui.core.mvc">
+	<Dialog title="{i18n>nuevoAscenso}">
+		<content>
+			<f:Form>
+				<f:layout>
+					<f:ResponsiveGridLayout labelSpanXL="4"
+					                        labelSpanL="3"
+					                        labelSpanM="4"
+					                        labelSpanS="12"
+					                        adjustLabelSpan="false"
+					                        emptySpanXL="0"
+					                        emptySpanL="4"
+					                        emptySpanM="0"
+					                        emptySpanS="0"
+					                        columnsXL="2"
+					                        columnsL="1"
+					                        columnsM="1"
+					                        singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>salario}">
+								<f:fields>
+									<Input value="{jsonModelAscender>/salario}" id="name"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="{i18n>fecha}">
+								<f:fields>
+									<DatePicker dateValue="{jsonModelAscender>/fecha}"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="{i18n>comentario}">
+								<f:fields>
+									<TextArea value="{jsonModelAscender>/comentario}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<buttons>
+			<Button text="{i18n>aceptar}" press="ascenderEmpleado"></Button>
+			<Button text="{i18n>cancelar}" press="cerrarFragmentoAscender"></Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

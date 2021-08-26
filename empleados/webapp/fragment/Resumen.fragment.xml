@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+                         xmlns:mvc="sap.ui.core.mvc" 
+                         xmlns="sap.m"  
+                         xmlns:form="sap.ui.layout.form">
+	<form:SimpleForm title="{i18n>revisionTipoEmpleado}"
+				     editable="false"
+				     layout="ResponsiveGridLayout">
+		<form:content>
+			<Label text="{i18n>tipo}"/>
+			<Text text="{= ${/tipo} === 'interno' ? ${i18n>interno} : ${/tipo} === 'autonomo' ? ${i18n>autonomo} : ${i18n>gerente}}"/>
+			<Link press="editarPaso1" text="{i18n>editar}" />
+		</form:content>
+	</form:SimpleForm>
+	<form:SimpleForm title="{i18n>revisionDatosEmpleado}"
+				     editable="false"
+				    layout="ResponsiveGridLayout">
+		<form:content>
+			<Label text="{i18n>nombre}"/>
+			<Text text="{/nombre}"/>
+			<Label text="{i18n>apellidos}"/>
+			<Text text="{/apellidos}"/>
+			<Label text="{= ${/tipo} === 'autonomo' ? ${i18n>cif} : ${i18n>dni}}"/>
+			<Text  text="{/dni}"/>
+			<Label text="{= ${/tipo} === 'autonomo' ? ${i18n>precioDiario} : ${i18n>salarioBrutoAnual}}"/>
+			<Text  text="{/salario}"/>
+			<Label text="{i18n>fechaIncorporacion}"/>
+			<Text  text="{ path : '/fechaIncorporacion',
+                           type : 'sap.ui.model.type.Date'}"/>
+			<Link press="editarPaso2" text="{i18n>editar}" />
+		</form:content>
+	</form:SimpleForm>
+	<form:SimpleForm title="{i18n>revisionInformacionAdicional}"
+				     editable="false"
+				     layout="ResponsiveGridLayout">
+		<form:content>
+			<Label text="{i18n>comentario}"/>
+			<Text text="{/comentario}"/>
+			<Label text="{i18n>archivos}"/>
+			<Text text="{/contadorArchivos} {i18n>archivos}"/>
+				<Label/>
+				<List items="{/archivos}">
+					<items>
+						<StandardListItem title="{DocName}"></StandardListItem>
+					</items>
+				</List>
+				<Link press="editarPaso3" text="{i18n>editar}" />
+			</form:content>
+		</form:SimpleForm>
+</core:FragmentDefinition>
