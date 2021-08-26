@@ -1,11 +1,15 @@
 // @ts-nocheck
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
+     * @param {typeof sap.ui.model.Filter} Filter
+     * @param {typeof sap.ui.model.FilterOperator} FilterOperator
 	 */
-    function (Controller) {
+    function (Controller, Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("logaligroup.empleados.controller.VerEmpleado", {
@@ -19,7 +23,22 @@ sap.ui.define([
                 oRouter.navTo("Menu", {}, true);
             },
 
-            buscarEmpleado: function () {
+            buscarEmpleado: function (oEvent) {
+
+                var aFilters = [];
+                var sQuery = oEvent.getSource().getValue();
+                if (sQuery && sQuery.length > 0) {
+				    var filter = new Filter("FirstName", FilterOperator.Contains, sQuery);
+                    aFilters.push(filter);
+                } 
+
+                var filter2 = new Filter("SapId", FilterOperator.EQ, "juan.palominos@gmail.com");
+                aFilters.push(filter2);
+                
+                // update list binding
+			    var oList = this.byId("listaEmpleados");
+			    var oBinding = oList.getBinding("items");
+			    oBinding.filter(aFilters, "Application");
 
             },
 

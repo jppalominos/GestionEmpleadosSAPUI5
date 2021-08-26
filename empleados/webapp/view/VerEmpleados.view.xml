@@ -15,7 +15,8 @@
 					<SearchField liveChange="buscarEmpleado" 
                                  width="100%"/>
 				</Toolbar>
-                <List itemPress="seleccionEmpleado" 
+                <List id="listaEmpleados"
+                      itemPress="seleccionEmpleado" 
                       items="{ path:'employeesModel>/Users',
                                filters:[{
                                    path:'SapId',
